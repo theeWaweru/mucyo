@@ -6,14 +6,14 @@
       "title": "Truthslinger",
       "category": "Photography",
       "description": "Documentary photography project capturing truth",
-      "image": "images/truthslinger-hero.jpg",
-      "images": [
-        "images/truthslinger-1.jpg",
-        "images/truthslinger-2.jpg"
-      ],
-      "story": "Full project description here...",
+      "story": "Full project story here...",
       "client": "Personal Project",
-      "year": "2024"
+      "year": "2024",
+      "image": "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/truthslinger/hero-1767963177914.jpg",
+      "images": [
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/truthslinger/gallery-1767963252695-dhg1af74m.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/truthslinger/gallery-1767963254998-vfzxuv322.jpg"
+      ]
     },
     {
       "id": "randy-in-studio",
@@ -21,14 +21,14 @@
       "title": "Randy in Studio",
       "category": "Portrait",
       "description": "Studio portrait session",
-      "image": "images/randy-hero.jpg",
-      "images": [
-        "images/randy-1.jpg",
-        "images/randy-2.jpg"
-      ],
-      "story": "Full project description here...",
+      "story": "Full project story here...",
       "client": "Randy",
-      "year": "2024"
+      "year": "2024",
+      "image": "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/randy-in-studio/hero-1767963193627.jpg",
+      "images": [
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/randy-in-studio/gallery-1767963278951-hre62smfx.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/randy-in-studio/gallery-1767963281543-mzbtzrsee.jpg"
+      ]
     },
     {
       "id": "elsa-gq",
@@ -36,11 +36,113 @@
       "title": "Elsa x GQ Magazine",
       "category": "Editorial",
       "description": "Fashion editorial shoot for GQ",
-      "image": "images/elsa-hero.jpg",
-      "images": [],
-      "story": "Full project description here...",
+      "story": "Full project story here...",
       "client": "GQ Magazine",
-      "year": "2024"
+      "year": "2024",
+      "image": "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/elsa-x-gq-magazine/hero-1767963207194.jpg",
+      "images": [
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/elsa-x-gq-magazine/gallery-1767963295160-3w2wwgd7v.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/elsa-x-gq-magazine/gallery-1767963297192-i4ttsvsdb.jpg"
+      ]
+    },
+    {
+      "id": "project-1767964149715",
+      "slug": "test",
+      "title": "Test",
+      "category": "Portrait",
+      "description": "Testing",
+      "story": "No full story",
+      "client": "David",
+      "year": "2025",
+      "image": "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/hero-1767964151369.jpg",
+      "images": [
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964155840-1dnh4b74v.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964159294-5l104oya9.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964534450-bqt34scm0.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964537940-mtqz7zykq.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964541024-jmmq8m6nt.jpg",
+        "https://s6qrp9leh8r1c9xt.public.blob.vercel-storage.com/projects/test/gallery-1767964543940-7zf4rad50.jpg"
+      ]
     }
-  ]
+  ],
+  "infoSection": [
+    {
+      "id": "info-1",
+      "order": 1,
+      "title": "Master Weavers",
+      "description": "The title above can be related to master weavers or not. It can also be deleted, not a must text to accompany image",
+      "image": "images/info-1.jpg"
+    },
+    {
+      "id": "info-2",
+      "order": 2,
+      "title": "Cultural Heritage",
+      "description": "Documenting the artisans and their craft",
+      "image": "images/info-2.jpg"
+    },
+    {
+      "id": "info-3",
+      "order": 3,
+      "title": "Traditional Crafts",
+      "description": "Preserving stories through photography",
+      "image": "images/info-3.jpg"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "What services do you offer?",
+      "answer": "I specialize in documentary photography, editorial shoots, and commercial projects. Each project is tailored to capture authentic moments and tell compelling visual stories.",
+      "order": 1
+    },
+    {
+      "id": "faq-2",
+      "question": "How do you price your services?",
+      "answer": "Pricing varies based on project scope, duration, and deliverables. Contact me for a custom quote tailored to your specific needs.",
+      "order": 2
+    },
+    {
+      "id": "faq-3",
+      "question": "What's your turnaround time?",
+      "answer": "Standard projects typically take 2-3 weeks from shoot to final delivery. Rush services are available upon request.",
+      "order": 3
+    },
+    {
+      "id": "faq-4",
+      "question": "Do you travel for projects?",
+      "answer": "Yes, I'm available for both local and international projects. Travel expenses are discussed during project planning.",
+      "order": 4
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "testimonial-1",
+      "name": "Sarah Johnson",
+      "role": "Creative Director, Brand Agency",
+      "quote": "Mucyo's ability to capture authentic moments is unmatched. His work elevated our entire campaign.",
+      "image": "images/testimonial-1.jpg",
+      "rating": 5,
+      "featured": true
+    },
+    {
+      "id": "testimonial-2",
+      "name": "David Chen",
+      "role": "Magazine Editor",
+      "quote": "Working with Mucyo was seamless. His editorial eye and professionalism made our cover shoot a success.",
+      "image": "images/testimonial-2.jpg",
+      "rating": 5,
+      "featured": true
+    }
+  ],
+  "siteSettings": {
+    "siteName": "Mucyo Herbert Balthazar Gasana",
+    "tagline": "Photographer & Visual Storyteller",
+    "email": "hello@mucyogasana.com",
+    "phone": "+250 XXX XXX XXX",
+    "social": {
+      "instagram": "https://instagram.com/mucyogasana",
+      "twitter": "https://twitter.com/mucyogasana",
+      "linkedin": "https://linkedin.com/in/mucyogasana"
+    }
+  }
 }

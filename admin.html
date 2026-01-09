@@ -4,21 +4,17 @@
   <meta charset="utf-8">
   <title>Admin - Mucyo Gasana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/normalize.css" rel="stylesheet">
+  <div id="seo-container"></div>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: #f5f5f5;
-      margin: 0;
       padding: 20px;
     }
 
-    .admin-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .admin-container { max-width: 1400px; margin: 0 auto; }
 
     .admin-header {
       background: #000;
@@ -26,10 +22,31 @@
       padding: 20px;
       border-radius: 8px;
       margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.2s;
+    }
+
+    .tab:hover { background: #f5f5f5; }
+    .tab.active { background: #000; color: #fff; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     .btn {
       background: #fff;
@@ -43,28 +60,17 @@
       transition: transform 0.2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: #000; color: #fff; }
+    .btn-danger { background: #ef4444; color: #fff; }
 
-    .btn-primary {
-      background: #000;
-      color: #fff;
-    }
-
-    .btn-danger {
-      background: #ef4444;
-      color: #fff;
-    }
-
-    .projects-grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
-      margin-bottom: 40px;
     }
 
-    .project-card {
+    .card {
       background: #fff;
       border-radius: 8px;
       overflow: hidden;
@@ -72,36 +78,21 @@
       transition: transform 0.2s;
     }
 
-    .project-card:hover {
+    .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .project-card img {
+    .card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
     }
 
-    .project-card-content {
-      padding: 16px;
-    }
-
-    .project-card h3 {
-      margin: 0 0 8px 0;
-      font-size: 18px;
-    }
-
-    .project-card p {
-      margin: 0 0 12px 0;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .project-card-actions {
-      display: flex;
-      gap: 8px;
-    }
+    .card-content { padding: 16px; }
+    .card h3 { margin-bottom: 8px; font-size: 18px; }
+    .card p { margin-bottom: 12px; color: #666; font-size: 14px; }
+    .card-actions { display: flex; gap: 8px; }
 
     .modal {
       display: none;
@@ -139,24 +130,14 @@
       margin-bottom: 24px;
     }
 
-    .modal-header h2 {
-      margin: 0;
-    }
-
     .close-modal {
       background: none;
       border: none;
       font-size: 24px;
       cursor: pointer;
-      padding: 0;
-      width: 32px;
-      height: 32px;
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
-
+    .form-group { margin-bottom: 20px; }
     .form-group label {
       display: block;
       margin-bottom: 8px;
@@ -180,6 +161,27 @@
       resize: vertical;
     }
 
+    .alert {
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .alert.active { display: block; }
+
     .image-upload-area {
       border: 2px dashed #ddd;
       border-radius: 8px;
@@ -189,9 +191,7 @@
       transition: border-color 0.2s;
     }
 
-    .image-upload-area:hover {
-      border-color: #000;
-    }
+    .image-upload-area:hover { border-color: #000; }
 
     .image-preview {
       display: grid;
@@ -224,150 +224,237 @@
       border-radius: 50%;
       cursor: pointer;
       font-size: 16px;
-      line-height: 1;
-    }
-
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #f3f3f3;
-      border-top: 3px solid #000;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .alert {
-      padding: 12px 16px;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .alert.success {
-      background: #d1fae5;
-      color: #065f46;
-      border: 1px solid #6ee7b7;
-    }
-
-    .alert.error {
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fca5a5;
-    }
-
-    .alert.active {
-      display: block;
     }
   </style>
 </head>
 <body>
   <div class="admin-container">
-    <!-- Header -->
     <div class="admin-header">
-      <div>
-        <h1 style="margin: 0 0 4px 0;">Portfolio Admin</h1>
-        <p style="margin: 0; opacity: 0.8;">Manage your projects</p>
-      </div>
-      <button class="btn" onclick="openAddModal()">+ Add New Project</button>
+      <h1>Portfolio Admin</h1>
+      <p style="opacity: 0.8;">Manage all content</p>
     </div>
 
-    <!-- Alerts -->
     <div id="alert" class="alert"></div>
 
-    <!-- Projects Grid -->
-    <div id="projects-grid" class="projects-grid">
-      <!-- Projects will be loaded here -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('projects')">Projects</button>
+      <button class="tab" onclick="switchTab('info')">Info Section</button>
+      <button class="tab" onclick="switchTab('faqs')">FAQs</button>
+      <button class="tab" onclick="switchTab('testimonials')">Testimonials</button>
+    </div>
+
+    <!-- Projects Tab -->
+    <div id="projects-tab" class="tab-content active">
+      <button class="btn btn-primary" onclick="openProjectModal()" style="margin-bottom: 20px;">+ Add Project</button>
+      <div id="projects-grid" class="grid"></div>
+    </div>
+
+    <!-- Info Section Tab -->
+    <div id="info-tab" class="tab-content">
+      <button class="btn btn-primary" onclick="openInfoModal()" style="margin-bottom: 20px;">+ Add Info Item</button>
+      <div id="info-grid" class="grid"></div>
+    </div>
+
+    <!-- FAQs Tab -->
+    <div id="faqs-tab" class="tab-content">
+      <button class="btn btn-primary" onclick="openFAQModal()" style="margin-bottom: 20px;">+ Add FAQ</button>
+      <div id="faqs-grid" class="grid"></div>
+    </div>
+
+    <!-- Testimonials Tab -->
+    <div id="testimonials-tab" class="tab-content">
+      <button class="btn btn-primary" onclick="openTestimonialModal()" style="margin-bottom: 20px;">+ Add Testimonial</button>
+      <div id="testimonials-grid" class="grid"></div>
     </div>
   </div>
 
-  <!-- Add/Edit Modal -->
+  <!-- Project Modal -->
   <div id="project-modal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modal-title">Add New Project</h2>
-        <button class="close-modal" onclick="closeModal()">×</button>
+        <h2>Project</h2>
+        <button class="close-modal" onclick="closeModal('project')">×</button>
       </div>
-
       <form id="project-form">
         <input type="hidden" id="project-id">
-
         <div class="form-group">
-          <label for="title">Project Title *</label>
-          <input type="text" id="title" required>
+          <label for="project-title">Title *</label>
+          <input type="text" id="project-title" required>
         </div>
-
         <div class="form-group">
-          <label for="slug">URL Slug *</label>
-          <input type="text" id="slug" required placeholder="e.g., truthslinger">
+          <label for="project-slug">Slug *</label>
+          <input type="text" id="project-slug" required>
         </div>
-
         <div class="form-group">
-          <label for="category">Category *</label>
-          <select id="category" required>
-            <option value="">Select category</option>
+          <label for="project-category">Category *</label>
+          <select id="project-category" required>
+            <option value="">Select</option>
             <option value="Photography">Photography</option>
             <option value="Portrait">Portrait</option>
             <option value="Editorial">Editorial</option>
             <option value="Commercial">Commercial</option>
-            <option value="Documentary">Documentary</option>
           </select>
         </div>
-
         <div class="form-group">
-          <label for="description">Short Description *</label>
-          <textarea id="description" required placeholder="Brief project description..."></textarea>
+          <label for="project-description">Description *</label>
+          <textarea id="project-description" required></textarea>
         </div>
-
         <div class="form-group">
-          <label for="story">Full Story</label>
-          <textarea id="story" placeholder="Tell the full story of this project..."></textarea>
+          <label for="project-story">Full Story</label>
+          <textarea id="project-story"></textarea>
         </div>
-
         <div class="form-group">
-          <label for="client">Client</label>
-          <input type="text" id="client" placeholder="e.g., GQ Magazine">
+          <label for="project-client">Client</label>
+          <input type="text" id="project-client">
         </div>
-
         <div class="form-group">
-          <label for="year">Year *</label>
-          <input type="number" id="year" required placeholder="2024" min="2000" max="2100">
+          <label for="project-year">Year *</label>
+          <input type="number" id="project-year" required>
         </div>
-
+        
+        <!-- HERO IMAGE -->
         <div class="form-group">
           <label>Hero Image *</label>
-          <div class="image-upload-area" onclick="document.getElementById('hero-image').click()">
+          <div class="image-upload-area" onclick="document.getElementById('project-hero-image').click()">
             <p>Click to upload hero image</p>
-            <input type="file" id="hero-image" accept="image/*" style="display: none;" onchange="handleHeroUpload(event)">
+            <input type="file" id="project-hero-image" accept="image/*" style="display: none;">
           </div>
-          <div id="hero-preview" class="image-preview"></div>
+          <div id="project-hero-preview" class="image-preview"></div>
         </div>
 
+        <!-- GALLERY IMAGES -->
         <div class="form-group">
           <label>Gallery Images</label>
-          <div class="image-upload-area" onclick="document.getElementById('gallery-images').click()">
+          <div class="image-upload-area" onclick="document.getElementById('project-gallery-images').click()">
             <p>Click to upload gallery images (multiple)</p>
-            <input type="file" id="gallery-images" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(event)">
+            <input type="file" id="project-gallery-images" accept="image/*" multiple style="display: none;">
           </div>
-          <div id="gallery-preview" class="image-preview"></div>
+          <div id="project-gallery-preview" class="image-preview"></div>
         </div>
 
-        <div class="form-group" style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 32px;">
-          <button type="button" class="btn" onclick="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">
-            <span id="submit-text">Save Project</span>
-            <span id="submit-loader" class="loading" style="display: none;"></span>
-          </button>
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn" onclick="closeModal('project')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="js/admin.js"></script>
+  <!-- Info Modal -->
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Info Item</h2>
+        <button class="close-modal" onclick="closeModal('info')">×</button>
+      </div>
+      <form id="info-form">
+        <input type="hidden" id="info-id">
+        <div class="form-group">
+          <label for="info-title">Title *</label>
+          <input type="text" id="info-title" required>
+        </div>
+        <div class="form-group">
+          <label for="info-description">Description *</label>
+          <textarea id="info-description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="info-order">Order *</label>
+          <input type="number" id="info-order" required min="1">
+        </div>
+
+        <!-- INFO IMAGE -->
+        <div class="form-group">
+          <label>Image *</label>
+          <div class="image-upload-area" onclick="document.getElementById('info-image').click()">
+            <p>Click to upload image</p>
+            <input type="file" id="info-image" accept="image/*" style="display: none;">
+          </div>
+          <div id="info-image-preview" class="image-preview"></div>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn" onclick="closeModal('info')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAQ Modal -->
+  <div id="faq-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>FAQ</h2>
+        <button class="close-modal" onclick="closeModal('faq')">×</button>
+      </div>
+      <form id="faq-form">
+        <input type="hidden" id="faq-id">
+        <div class="form-group">
+          <label for="faq-question">Question *</label>
+          <input type="text" id="faq-question" required>
+        </div>
+        <div class="form-group">
+          <label for="faq-answer">Answer *</label>
+          <textarea id="faq-answer" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="faq-order">Order *</label>
+          <input type="number" id="faq-order" required min="1">
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn" onclick="closeModal('faq')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Testimonial Modal -->
+  <div id="testimonial-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Testimonial</h2>
+        <button class="close-modal" onclick="closeModal('testimonial')">×</button>
+      </div>
+      <form id="testimonial-form">
+        <input type="hidden" id="testimonial-id">
+        <div class="form-group">
+          <label for="testimonial-name">Name *</label>
+          <input type="text" id="testimonial-name" required>
+        </div>
+        <div class="form-group">
+          <label for="testimonial-role">Role *</label>
+          <input type="text" id="testimonial-role" required>
+        </div>
+        <div class="form-group">
+          <label for="testimonial-quote">Quote *</label>
+          <textarea id="testimonial-quote" required></textarea>
+        </div>
+
+        <!-- TESTIMONIAL IMAGE -->
+        <div class="form-group">
+          <label>Photo (optional)</label>
+          <div class="image-upload-area" onclick="document.getElementById('testimonial-image').click()">
+            <p>Click to upload photo</p>
+            <input type="file" id="testimonial-image" accept="image/*" style="display: none;">
+          </div>
+          <div id="testimonial-image-preview" class="image-preview"></div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="testimonial-featured">
+            Featured on homepage
+          </label>
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" class="btn" onclick="closeModal('testimonial')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin-full.js"></script>
 </body>
 </html>
