@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin - Mucyo Gasana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/normalize.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      background: #000;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #000;
+      color: #fff;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-card-content {
+      padding: 16px;
+    }
+
+    .project-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
+
+    .project-card p {
+      margin: 0 0 12px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .project-card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 8px;
+      padding: 32px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .image-upload-area {
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .image-upload-area:hover {
+      border-color: #000;
+    }
+
+    .image-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .image-preview-item {
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .image-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .alert.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+      <div>
+        <h1 style="margin: 0 0 4px 0;">Portfolio Admin</h1>
+        <p style="margin: 0; opacity: 0.8;">Manage your projects</p>
+      </div>
+      <button class="btn" onclick="openAddModal()">+ Add New Project</button>
+    </div>
+
+    <!-- Alerts -->
+    <div id="alert" class="alert"></div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid" class="projects-grid">
+      <!-- Projects will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Add New Project</h2>
+        <button class="close-modal" onclick="closeModal()">×</button>
+      </div>
+
+      <form id="project-form">
+        <input type="hidden" id="project-id">
+
+        <div class="form-group">
+          <label for="title">Project Title *</label>
+          <input type="text" id="title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="slug">URL Slug *</label>
+          <input type="text" id="slug" required placeholder="e.g., truthslinger">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <select id="category" required>
+            <option value="">Select category</option>
+            <option value="Photography">Photography</option>
+            <option value="Portrait">Portrait</option>
+            <option value="Editorial">Editorial</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Documentary">Documentary</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Short Description *</label>
+          <textarea id="description" required placeholder="Brief project description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="story">Full Story</label>
+          <textarea id="story" placeholder="Tell the full story of this project..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="client">Client</label>
+          <input type="text" id="client" placeholder="e.g., GQ Magazine">
+        </div>
+
+        <div class="form-group">
+          <label for="year">Year *</label>
+          <input type="number" id="year" required placeholder="2024" min="2000" max="2100">
+        </div>
+
+        <div class="form-group">
+          <label>Hero Image *</label>
+          <div class="image-upload-area" onclick="document.getElementById('hero-image').click()">
+            <p>Click to upload hero image</p>
+            <input type="file" id="hero-image" accept="image/*" style="display: none;" onchange="handleHeroUpload(event)">
+          </div>
+          <div id="hero-preview" class="image-preview"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Gallery Images</label>
+          <div class="image-upload-area" onclick="document.getElementById('gallery-images').click()">
+            <p>Click to upload gallery images (multiple)</p>
+            <input type="file" id="gallery-images" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(event)">
+          </div>
+          <div id="gallery-preview" class="image-preview"></div>
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 32px;">
+          <button type="button" class="btn" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <span id="submit-text">Save Project</span>
+            <span id="submit-loader" class="loading" style="display: none;"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

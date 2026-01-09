@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": "truthslinger",
+      "slug": "truthslinger",
+      "title": "Truthslinger",
+      "category": "Photography",
+      "description": "Documentary photography project capturing truth",
+      "image": "images/truthslinger-hero.jpg",
+      "images": [
+        "images/truthslinger-1.jpg",
+        "images/truthslinger-2.jpg"
+      ],
+      "story": "Full project description here...",
+      "client": "Personal Project",
+      "year": "2024"
+    },
+    {
+      "id": "randy-in-studio",
+      "slug": "randy-in-studio",
+      "title": "Randy in Studio",
+      "category": "Portrait",
+      "description": "Studio portrait session",
+      "image": "images/randy-hero.jpg",
+      "images": [
+        "images/randy-1.jpg",
+        "images/randy-2.jpg"
+      ],
+      "story": "Full project description here...",
+      "client": "Randy",
+      "year": "2024"
+    },
+    {
+      "id": "elsa-gq",
+      "slug": "elsa-x-gq-magazine",
+      "title": "Elsa x GQ Magazine",
+      "category": "Editorial",
+      "description": "Fashion editorial shoot for GQ",
+      "image": "images/elsa-hero.jpg",
+      "images": [],
+      "story": "Full project description here...",
+      "client": "GQ Magazine",
+      "year": "2024"
+    }
+  ]
+}
